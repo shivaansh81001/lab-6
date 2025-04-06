@@ -34,7 +34,7 @@ class CIFAR10RGB(Dataset):
                 transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
             ])
         
-        self.transform = transform
+        self.transform = transform 
         
         self.images = []
         self.labels = []
