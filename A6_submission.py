@@ -47,6 +47,7 @@ class Classifier(nn.Module):
         optionally initialize weights
         """
         """add code here"""
+        
 
     def forward(self, x):
         """
@@ -57,7 +58,37 @@ class Classifier(nn.Module):
         """
         out = None
         """add code here"""
-        return out
+        x=nn.functional.relu(self.conv1(x))
+        x=nn.functional.relu(self.conv2(x))
+        
+        x=nn.MaxPool2d(x,kernel_size=2,stride=1)
+        x=nn.functional.relu(self.conv3(x))
+        x=nn.functional.relu(self.conv4(x))
+
+        x=nn.MaxPool2d(x,kernel_size=2,stride=1)
+        x=nn.functional.relu(self.conv5(x))
+        x=nn.functional.relu(self.conv6(x))
+        x=nn.functional.relu(self.conv7(x))
+
+        x=nn.MaxPool2d(x,kernel_size=2,stride=1)
+        x=nn.functional.relu(self.conv8(x))
+        x=nn.functional.relu(self.conv9(x))
+        x=nn.functional.relu(self.conv10(x))
+
+        x=nn.MaxPool2d(x,kernel_size=2,stride=1)
+        x=nn.functional.relu(self.conv11(x))
+        x=nn.functional.relu(self.conv12(x))
+        x=nn.functional.relu(self.conv13(x))
+
+        x=nn.MaxPool2d(x,kernel_size=2,stride=1)
+
+        x = x.view(x.size(0),-1)
+
+        x=nn.functional.relu(self.fc1(x))
+        x=nn.functional.relu(self.fc2(x))
+        x= self.fc3(x)
+
+        return x
 
 class Params:
     def __init__(self):
