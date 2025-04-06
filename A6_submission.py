@@ -57,7 +57,42 @@ class Classifier(nn.Module):
         """
         out = None
         """add code here"""
-        return out
+        x=nn.functional.relu(self.conv1(x))
+        x=nn.functional.relu(self.conv2(x))
+        #print(x.shape)
+        
+        x=nn.functional.max_pool2d(x,kernel_size=(2,2),stride=1)
+        x=nn.functional.relu(self.conv3(x))
+        x=nn.functional.relu(self.conv4(x))
+        #print(x.shape)
+
+        x=nn.functional.max_pool2d(x,kernel_size=(2,2),stride=1)
+        x=nn.functional.relu(self.conv5(x))
+        x=nn.functional.relu(self.conv6(x))
+        x=nn.functional.relu(self.conv7(x))
+        #print(x.shape)
+
+        x=nn.functional.max_pool2d(x,kernel_size=(2,2),stride=1)
+        x=nn.functional.relu(self.conv8(x))
+        x=nn.functional.relu(self.conv9(x))
+        x=nn.functional.relu(self.conv10(x))
+        #print(x.shape)
+
+        x=nn.functional.max_pool2d(x,kernel_size=(2,2),stride=1)
+        x=nn.functional.relu(self.conv11(x))
+        x=nn.functional.relu(self.conv12(x))
+        x=nn.functional.relu(self.conv13(x))
+        #print(x.shape)
+
+        x=nn.functional.max_pool2d(x,kernel_size=(2,2),stride=1)
+
+        #print(x.shape)
+        x = x.view(x.size(0),-1)
+
+        x=nn.functional.relu(self.fc1(x))
+        x=nn.functional.relu(self.fc2(x))
+        x= self.fc3(x)
+        return x
 
 class Params:
     def __init__(self):
