@@ -32,13 +32,13 @@ class Classifier(nn.Module):
         self.conv13 = nn.Conv2d(512,512,kernel_size=(3,3),stride=1)
 
         #fully conncted 1
-        self.fc1 = nn.Linear(512,2048)
+        self.fc1 = nn.Linear(512,4096)
 
         #fully conncted 2
-        self.fc2 = nn.Linear(2048,2048)
+        self.fc2 = nn.Linear(4096,4096)
 
         #fully conncted 2
-        self.fc3 = nn.Linear(2048,10)
+        self.fc3 = nn.Linear(4096,10)
 
         """add code here"""
 
