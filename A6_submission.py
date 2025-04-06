@@ -7,6 +7,38 @@ class Classifier(nn.Module):
         """
         define the layers in your CNN
         """
+        #refrence = https://lekhuyen.medium.com/an-overview-of-vgg16-and-nin-models-96e4bf398484
+        #conv1
+        self.conv1 = nn.Conv2d(3,64,kernel_size=2,stride=1)
+        self.conv2 = nn.Conv2d(64,64,kernel_size=2,stride=1)
+
+        #conv2
+        self.conv3 = nn.Conv2d(64,128,kernel_size=2,stride=1)
+        self.conv4 = nn.Conv2d(128,128,kernel_size=2,stride=1)
+
+        #conv3
+        self.conv5 = nn.Conv2d(128,256,kernel_size=2,stride=1)
+        self.conv6 = nn.Conv2d(256,256,kernel_size=2,stride=1)
+        self.conv7 = nn.Conv2d(256,256,kernel_size=2,stride=1)
+
+        #conv4
+        self.conv8 = nn.Conv2d(256,512,kernel_size=2,stride=1)
+        self.conv9 = nn.Conv2d(512,512,kernel_size=2,stride=1)
+        self.conv10 = nn.Conv2d(512,512,kernel_size=2,stride=1)
+
+        #conv5
+        self.conv11 = nn.Conv2d(512,512,kernel_size=2,stride=1)
+        self.conv12 = nn.Conv2d(512,512,kernel_size=2,stride=1)
+        self.conv13 = nn.Conv2d(512,512,kernel_size=2,stride=1)
+
+        #fully conncted 1
+        self.fc1 = nn.Linear(512,2048)
+
+        #fully conncted 2
+        self.fc2 = nn.Linear(2048,2048)
+
+        #fully conncted 2
+        self.fc3 = nn.Linear(2048,10)
 
         """add code here"""
 
