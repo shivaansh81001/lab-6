@@ -144,10 +144,10 @@ class Params:
         """
         def __init__(self):
             self.type = 'adam' # You can choose either 'adam' or 'sgd' to play around with optimizer type
-            self.lr = 5e-4  # You can play around with the learning rate here
+            self.lr = 5e-5  # You can play around with the learning rate here
             self.momentum = 0.9
             self.eps = 1e-8
-            self.weight_decay = 1e-4  # You can modify weight decay here
+            self.weight_decay = 1e-5  # You can modify weight decay here
 
     class Training:
         """
