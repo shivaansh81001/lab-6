@@ -45,17 +45,17 @@ class Classifier(nn.Module):
         self.bn13 = nn.BatchNorm2d(512)
 
         #fully conncted 1
-        self.fc1 = nn.Linear(512,2048)
-        self.bnfc1 = nn.BatchNorm1d(2048)
+        self.fc1 = nn.Linear(512,512)
+        self.bnfc1 = nn.BatchNorm1d(512)
 
         #fully conncted 2
-        self.fc2 = nn.Linear(2048,2048)
-        self.bnfc2 = nn.BatchNorm1d(2048)
+        self.fc2 = nn.Linear(512,256)
+        self.bnfc2 = nn.BatchNorm1d(256)
 
         #fully conncted 2
-        self.fc3 = nn.Linear(2048,10)
+        self.fc3 = nn.Linear(256,10)
 
-        self.dropout = nn.Dropout(0.45)
+        self.dropout = nn.Dropout(0.6)
 
         """add code here"""
 
