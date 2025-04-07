@@ -45,15 +45,17 @@ class Classifier(nn.Module):
         self.bn13 = nn.BatchNorm2d(512)
 
         #fully conncted 1
-        self.fc1 = nn.Linear(512,4096)
-        self.bnfc1 = nn.BatchNorm1d(4096)
+        self.fc1 = nn.Linear(512,1024)
+        self.bnfc1 = nn.BatchNorm1d(1024)
 
         #fully conncted 2
-        self.fc2 = nn.Linear(4096,4096)
-        self.bnfc2 = nn.BatchNorm1d(4096)
+        self.fc2 = nn.Linear(1024,1024)
+        self.bnfc2 = nn.BatchNorm1d(1024)
 
         #fully conncted 2
-        self.fc3 = nn.Linear(4096,10)
+        self.fc3 = nn.Linear(1024,10)
+
+        self.dropout = nn.Dropout(0.6)
 
         """add code here"""
 
@@ -62,6 +64,19 @@ class Classifier(nn.Module):
         optionally initialize weights
         """
         """add code here"""
+        #https://github.com/Xiaoming-Yu/RAGAN/blob/master/models/model.py#L50
+        #https://stackoverflow.com/questions/61848635/how-to-decide-which-mode-to-use-for-kaiming-normal-initialization
+        #and had to look up at GPT for understanding the implementation
+        for layer in self.modules():
+            if isinstance(layer,nn.Conv2d):    #weights for conv layer
+                nn.init.kaiming_normal_(layer.weight, mode='fan_out', nonlinearity='relu')
+            elif isinstance(layer,nn.Linear):  #Linear / fc layers weights init
+                nn.init.xavier_normal_(layer.weight)
+            elif isinstance(layer,(nn.BatchNorm2d, nn.BatchNorm1d)): #this is for normalization layers- (fc and conv) - normal distribution
+                nn.init.constant_(layer.weight,1)
+                nn.init.constant_(layer.bias,0)
+
+
 
     def forward(self, x):
         """
@@ -102,6 +117,7 @@ class Classifier(nn.Module):
 
         x = x.view(x.size(0),-1)
         #print(x.shape)
+        x = self.dropout(x)
 
         x=nn.functional.relu(self.bnfc1(self.fc1(x)))
         x=nn.functional.relu(self.bnfc2(self.fc2(x)))
@@ -128,10 +144,10 @@ class Params:
         """
         def __init__(self):
             self.type = 'adam' # You can choose either 'adam' or 'sgd' to play around with optimizer type
-            self.lr = 5e-3  # You can play around with the learning rate here
+            self.lr = 5e-4  # You can play around with the learning rate here
             self.momentum = 0.9
             self.eps = 1e-8
-            self.weight_decay = 1e-5  # You can modify weight decay here
+            self.weight_decay = 1e-4  # You can modify weight decay here
 
     class Training:
         """
@@ -139,9 +155,9 @@ class Params:
         """
         def __init__(self):
             self.probs_data = ''
-            self.batch_size = 64  # you can change batch size here
+            self.batch_size = 128  # you can change batch size here
             self.n_workers = 4  
-            self.n_epochs =65  # you can modify number of epoches here
+            self.n_epochs =100  # you can modify number of epoches here
 
     class Validation:
         def __init__(self):
