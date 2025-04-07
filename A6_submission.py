@@ -45,17 +45,17 @@ class Classifier(nn.Module):
         self.bn13 = nn.BatchNorm2d(512)
 
         #fully conncted 1
-        self.fc1 = nn.Linear(512,1024)
-        self.bnfc1 = nn.BatchNorm1d(1024)
+        self.fc1 = nn.Linear(512,2048)
+        self.bnfc1 = nn.BatchNorm1d(2048)
 
         #fully conncted 2
-        self.fc2 = nn.Linear(1024,1024)
-        self.bnfc2 = nn.BatchNorm1d(1024)
+        self.fc2 = nn.Linear(2048,2048)
+        self.bnfc2 = nn.BatchNorm1d(2048)
 
         #fully conncted 2
-        self.fc3 = nn.Linear(1024,10)
+        self.fc3 = nn.Linear(2048,10)
 
-        self.dropout = nn.Dropout(0.6)
+        self.dropout = nn.Dropout(0.45)
 
         """add code here"""
 
@@ -144,10 +144,10 @@ class Params:
         """
         def __init__(self):
             self.type = 'adam' # You can choose either 'adam' or 'sgd' to play around with optimizer type
-            self.lr = 5e-5  # You can play around with the learning rate here
+            self.lr = 5e-4  # You can play around with the learning rate here
             self.momentum = 0.9
             self.eps = 1e-8
-            self.weight_decay = 1e-5  # You can modify weight decay here
+            self.weight_decay = 1e-4  # You can modify weight decay here
 
     class Training:
         """
