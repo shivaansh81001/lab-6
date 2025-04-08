@@ -49,11 +49,11 @@ class Classifier(nn.Module):
         self.bnfc1 = nn.BatchNorm1d(512)
 
         #fully conncted 2
-        self.fc2 = nn.Linear(512,256)
-        self.bnfc2 = nn.BatchNorm1d(256)
+        self.fc2 = nn.Linear(512,512)
+        self.bnfc2 = nn.BatchNorm1d(512)
 
         #fully conncted 2
-        self.fc3 = nn.Linear(256,10)
+        self.fc3 = nn.Linear(512,10)
 
         self.dropout = nn.Dropout(0.6)
 
@@ -157,7 +157,7 @@ class Params:
             self.probs_data = ''
             self.batch_size = 128  # you can change batch size here
             self.n_workers = 4  
-            self.n_epochs =100  # you can modify number of epoches here
+            self.n_epochs =27  # you can modify number of epoches here
 
     class Validation:
         def __init__(self):
