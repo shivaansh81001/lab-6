@@ -55,7 +55,7 @@ class Classifier(nn.Module):
         #fully conncted 2
         self.fc3 = nn.Linear(512,10)
 
-        self.dropout = nn.Dropout(0.6)
+        self.dropout = nn.Dropout(0.5)
 
         """add code here"""
 
@@ -155,9 +155,9 @@ class Params:
         """
         def __init__(self):
             self.probs_data = ''
-            self.batch_size = 128  # you can change batch size here
+            self.batch_size = 32  # you can change batch size here
             self.n_workers = 4  
-            self.n_epochs =27  # you can modify number of epoches here
+            self.n_epochs=30  # you can modify number of epoches here
 
     class Validation:
         def __init__(self):
